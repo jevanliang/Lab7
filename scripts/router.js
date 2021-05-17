@@ -5,6 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
+// const home_location = window.location.href
 router.setState = function() {
   /**
    * - There are three states that your SPA app will have
@@ -35,4 +36,52 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+  /*pushing home state*/
+  let home = {
+    home: "/#home"
+  };
+  //When we first load in the first page
+  window.addEventListener('onload', (event)=>{
+    history.pushState({ home }, "home", "/#home");
+  })
+
+  /*Pushing entry state when a specific entry is clicked */
+  if(document.querySelector('entry-page').getAttribute('class') != null){
+    history.pushState({}, "Entry", "/#entry" + document.querySelector('entry-page').getAttribute('class'));
+  }
+
+  /*pushing setting state */
+  let settings = {
+    setting: "/#settings"
+  };
+
+  //adding onclick functionality to image, click on setting image brings you to setting
+  let image = document.querySelector('img');
+  image.setAttribute('onclick', "alert('click')");
+  image.onclick = function(){
+    history.pushState({settings}, "Settings", "/#settings");
+    document.querySelector('body').classList.add('settings');
+    document.querySelector('h1').innerHTML='Settings';
+    //clear entry-page element and add it back
+    document.querySelector('entry-page').remove();
+    let entry_page = document.createElement('entry-page');
+    let ref_script = document.querySelector('script');
+    ref_script.parentNode.insertBefore(entry_page, ref_script.nextSibling);
+    document.querySelector('body').setAttribute('class', "settings");
+  }
+
+  //clicking the title, go back to home page
+  document.querySelector('h1').setAttribute('onclick', "alert('click')");
+  document.querySelector('h1').onclick = function(){
+    history.pushState({home}, "home", "/#home");
+    document.querySelector('body').classList.remove(['settings', 'single-entry']);
+    document.querySelector('h1').innerHTML = 'Journal Entries';
+    //clear entry-page element and add it back
+    document.querySelector('entry-page').remove();
+    let entry_page = document.createElement('entry-page');
+    let ref_script = document.querySelector('script');
+    ref_script.parentNode.insertBefore(entry_page, ref_script.nextSibling);
+    document.querySelector('body').setAttribute('class', "");
+  }
+
 }
