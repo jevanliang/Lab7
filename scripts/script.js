@@ -16,7 +16,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-
 let count = 1;
 
 let track = document.querySelector('entry-page').entry;
