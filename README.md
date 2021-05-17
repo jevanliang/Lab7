@@ -1,7 +1,7 @@
 # Lab7_Solution
 
 # Authors 
--Trai Pham
+-Trai Pham </br>
 -Jerry Liang
 
 # Github pages link
